@@ -140,15 +140,12 @@ jobs:
           echo "## Ruff" >> "$SUMMARY"
           echo "### Ejecutá **ruff check /src** para correr las comprobaciones localmente." >> "$SUMMARY"
           echo "" >> "$SUMMARY"
-#          echo "- Estado del step: **${{ steps.pylint.outcome || 'success' }}**" >> "$SUMMARY"
-#          echo "" >> "$SUMMARY"
 
           if [ ! -f ruff-report.txt ]; then
             echo "_No se generó ruff-report.txt (ruff no se ejecutó)._ ❌" >> "$SUMMARY"
           elif [ ! -s ruff-report.txt ]; then
             echo "Sin observaciones. ✅ " >> "$SUMMARY"
           else
-#            grep -E '^[^:]+:[0-9]+:' pylint-report.txt | 
             head -n 200 ruff-report.txt | while IFS= read -r line; do
               FILE=$(echo "$line" | cut -d: -f1)
               LINE_NO=$(echo "$line" | cut -d: -f2)
@@ -157,9 +154,6 @@ jobs:
 
               CODE=$(echo "$REST" | awk '{print $1}')
               MSG=$(echo "$REST" | sed -E 's/^[[:space:]]*[A-Z0-9]+[[:space:]]+//')
-          
-  #              [ -z "$CODE" ] && CODE="pylint"
-  #              [ -z "$MSG" ] && MSG="$REST"
           
               echo "- \`$FILE:$LINE_NO:$COL_NO\` **$CODE** ❌" >> "$SUMMARY"
               echo "  - $MSG" >> "$SUMMARY"
@@ -172,15 +166,12 @@ jobs:
           echo "## Flake8" >> "$SUMMARY"
           echo "### Ejecutá **flake8 /src** para correr las comprobaciones localmente." >> "$SUMMARY"
           echo "" >> "$SUMMARY"
-      #          echo "- Estado del step: **${{ steps.pylint.outcome || 'success' }}**" >> "$SUMMARY"
-      #          echo "" >> "$SUMMARY"
-           
+          
           if [ ! -f flake8-report.txt ]; then
             echo "_No se generó flake8-report.txt (flake8 no se ejecutó)._ ❌" >> "$SUMMARY"
           elif [ ! -s flake8-report.txt ]; then
             echo "Sin observaciones. ✅ " >> "$SUMMARY"
           else
-      #            grep -E '^[^:]+:[0-9]+:' pylint-report.txt | 
             head -n 200 flake8-report.txt | while IFS= read -r line; do
               FILE=$(echo "$line" | cut -d: -f1)
               LINE_NO=$(echo "$line" | cut -d: -f2)
@@ -189,9 +180,6 @@ jobs:
 
               CODE=$(echo "$REST" | awk '{print $1}')
               MSG=$(echo "$REST" | sed -E 's/^[[:space:]]*[A-Z0-9]+[[:space:]]+//')
-        
-        #              [ -z "$CODE" ] && CODE="pylint"
-        #              [ -z "$MSG" ] && MSG="$REST"
              
               echo "- \`$FILE:$LINE_NO:$COL_NO\` **$CODE** ❌" >> "$SUMMARY"
               echo "  - $MSG" >> "$SUMMARY"
