@@ -149,17 +149,17 @@ jobs:
             echo "Sin observaciones. ✅ " >> "$SUMMARY"
           else
 #            grep -E '^[^:]+:[0-9]+:' pylint-report.txt | 
-            head -n 200 ruff-report.text | while IFS= read -r line; do
+            head -n 200 ruff-report.txt | while IFS= read -r line; do
               FILE=$(echo "$line" | cut -d: -f1)
               LINE_NO=$(echo "$line" | cut -d: -f2)
               COL_NO=$(echo "$line" | cut -d: -f3)
               REST=$(echo "$line" | cut -d: -f4-)
 
               CODE=$(echo "$REST" | awk '{print $1}')
-              MSG=$(echo "$REST" | sed -n 's/^[[:space:]]*[A-Z0-9]+[[:space:]]+//')
+              MSG=$(echo "$REST" | sed -E 's/^[[:space:]]*[A-Z0-9]+[[:space:]]+//')
           
-#              [ -z "$CODE" ] && CODE="pylint"
-#              [ -z "$MSG" ] && MSG="$REST"
+  #              [ -z "$CODE" ] && CODE="pylint"
+  #              [ -z "$MSG" ] && MSG="$REST"
           
               echo "- \`$FILE:$LINE_NO:$COL_NO\` **$CODE** ❌" >> "$SUMMARY"
               echo "  - $MSG" >> "$SUMMARY"
@@ -181,14 +181,14 @@ jobs:
             echo "Sin observaciones. ✅ " >> "$SUMMARY"
           else
       #            grep -E '^[^:]+:[0-9]+:' pylint-report.txt | 
-            head -n 200 flake8-report.text | while IFS= read -r line; do
+            head -n 200 flake8-report.txt | while IFS= read -r line; do
               FILE=$(echo "$line" | cut -d: -f1)
               LINE_NO=$(echo "$line" | cut -d: -f2)
               COL_NO=$(echo "$line" | cut -d: -f3)
               REST=$(echo "$line" | cut -d: -f4-)
 
               CODE=$(echo "$REST" | awk '{print $1}')
-              MSG=$(echo "$REST" | sed -n 's/^[[:space:]]*[A-Z0-9]+[[:space:]]+//')
+              MSG=$(echo "$REST" | sed -E 's/^[[:space:]]*[A-Z0-9]+[[:space:]]+//')
         
         #              [ -z "$CODE" ] && CODE="pylint"
         #              [ -z "$MSG" ] && MSG="$REST"
