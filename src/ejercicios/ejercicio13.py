@@ -1,3 +1,4 @@
+"""algo"""
 primo = int(input("Primo: "))
 cantidad_primos = 0
 while primo != 0:

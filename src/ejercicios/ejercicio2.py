@@ -1,3 +1,7 @@
+"""
+Escribir un programa que solicite al usuario ingresar un número entero.
+"""
+
 number = int(input("Ingrese un numero: "))
 
 if number > 10:

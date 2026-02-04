@@ -1,3 +1,4 @@
+"""algo"""
 alumno = int(input("Ingrese el legajo del alumno: "))
 aprobados = 0
 desaprobados = 0

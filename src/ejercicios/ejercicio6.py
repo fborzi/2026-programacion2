@@ -1,3 +1,4 @@
+"""algo"""
 cantidad = int(input("Ingrese la cantidad de numero a procesar: "))
 suma = 0
 

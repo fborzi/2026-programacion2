@@ -1,3 +1,4 @@
+"""algo"""
 monto = float(input("Ingrese el monto de venta: "))
 total_ventas = 0.0
 

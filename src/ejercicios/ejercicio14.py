@@ -1,3 +1,4 @@
+"""algo"""
 cadena = input("Ingrese una cadena de texto: ").strip()
 
 cantidad_palabras = cadena.count(" ") + 1 if cadena else 0

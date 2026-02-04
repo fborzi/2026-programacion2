@@ -1,3 +1,4 @@
+"""algo"""
 char = input("Ingrese un caracter: ")
 cadena = ""
 

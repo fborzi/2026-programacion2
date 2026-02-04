@@ -1,3 +1,4 @@
+"""algo"""
 cadena = input("Ingrese una cadena de texto: ").lower()
 caracter = input("Ingrese un caracter a reemplazar: ").lower()
 nueva_cadena = ""

@@ -1,3 +1,4 @@
+"""algo"""
 cadena = input("Ingrese una cadena de texto: ").lower()
 vocales = "aeiou"
 
