@@ -26,6 +26,8 @@ jobs:
           
       - name: Run tests
         id: tests
+        env:
+          PYTHONPATH: src:test
         run: |
           pytest -v test/ --junitxml=pytest-report.xml
 
