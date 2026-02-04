@@ -5,13 +5,13 @@ import sys
 import unittest
 from unittest.mock import patch
 
-from utils.constant import REGEX_FOR_LETTERS
+from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_STRING_WITHOUT_COLON
 
 
-class TestExercise5(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio5"
+class TestExercise18(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio18"
 
-    def run_exercise(self, *inputs) -> list[str]:
+    def run_exercise(self, *inputs: str) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""
         with patch("builtins.input", side_effect=list(inputs)):
             with patch("sys.stdout", new = io.StringIO()) as fake_out:
@@ -26,19 +26,23 @@ class TestExercise5(unittest.TestCase):
     def validateRegex(self, line: str) -> None:
         self.assertRegex(line, REGEX_FOR_LETTERS, "The print must contain a sentence explaining the result.")
 
-    def test_discount(self):
-        lines = self.run_exercise("lunes", 11)
-        discount = lines[0].lower().__contains__("accede")
-        self.assertTrue(discount, "The text is not specified as the exercise requires.")
-        self.validateRegex(lines[0])
+    def test_capitalize(self):
+        lines = self.run_exercise("harry POTTER")
 
-    def test_no_discount(self):
-        lines = self.run_exercise("lunes", 2)
-        self.assertEqual(lines, [])
+        m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
 
-    def test_no_discount_weekday(self):
-        lines = self.run_exercise("martes", 10)
-        self.assertEqual(lines, [])
+        print(lines)
+        self.assertIsNotNone(m1)
+        self.assertEqual(m1[0], "Harry potter")
+
+    def test_capitalize_space(self):
+        lines = self.run_exercise(" harry POTTER ")
+
+        m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
+
+        print(lines)
+        self.assertIsNotNone(m1)
+        self.assertEqual(m1[0], "Harry potter")
 
 
 if __name__ == '__main__':
