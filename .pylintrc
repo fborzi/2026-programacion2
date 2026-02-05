@@ -1,7 +1,6 @@
 [MAIN]
 # Activamos el checker de documentación de parámetros
-load-plugins = pylint.extensions.docparams
-load-plugins = pylint.extensions.typing
+load-plugins = pylint.extensions.docparams, pylint.extensions.typing
 
 # No aceptar funciones sin documentación de parámetros / retorno
 accept-no-param-doc = no

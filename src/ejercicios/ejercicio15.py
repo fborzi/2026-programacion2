@@ -1,11 +1,11 @@
 """algo"""
 cadena = input("Ingrese una cadena de texto: ").lower()
-vocales = "aeiou"
+VOCALES = "aeiou"
 
 vocales_aparecen = ""
 
 for caracter in cadena:
-    if caracter in vocales:
+    if caracter in VOCALES:
         if caracter not in vocales_aparecen:
             vocales_aparecen = vocales_aparecen + caracter
 

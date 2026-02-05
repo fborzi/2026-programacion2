@@ -1,5 +1,6 @@
 """
-Escribir un programa que solicite al usuario ingresar dos números enteros y luego realice las siguientes operaciones:
+Escribir un programa que solicite al usuario ingresar dos números
+enteros y luego realice las siguientes operaciones:
 """
 
 number1 = int(input("Ingrese un numero: "))

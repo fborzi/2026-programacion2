@@ -4,8 +4,6 @@ positivos = 0
 cantidad_positivos = 0
 negativos = 0
 ceros = 0
-promedio = 0
-
 
 while cantidad_enteros < 20:
     entero = int(input("Ingrese un numero entre -10 y 10: "))
