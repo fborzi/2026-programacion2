@@ -5,13 +5,13 @@ import sys
 import unittest
 from unittest.mock import patch
 
-from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_INT_ONLY
+from utils.constant import REGEX_FOR_LETTERS
 
 
-class TestExercise6(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio6"
+class TestExercise205(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio205"
 
-    def run_exercise(self, *inputs: int) -> list[str]:
+    def run_exercise(self, *inputs) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""
         with patch("builtins.input", side_effect=list(inputs)):
             with patch("sys.stdout", new = io.StringIO()) as fake_out:
@@ -26,17 +26,19 @@ class TestExercise6(unittest.TestCase):
     def validateRegex(self, line: str) -> None:
         self.assertRegex(line, REGEX_FOR_LETTERS, "The print must contain a sentence explaining the result.")
 
-    def test_counter(self):
-        lines = self.run_exercise(5, 1, 2, 3, 4, 5)
-        m = re.search(REGEX_FOR_INT_ONLY, lines[0])
-        self.assertIsNotNone(m)
-        self.assertEqual(m.group(1), "15")
+    def test_discount(self):
+        lines = self.run_exercise("lunes", 11)
+        discount = lines[0].lower().__contains__("accede")
+        self.assertTrue(discount, "The text is not specified as the exercise requires.")
         self.validateRegex(lines[0])
 
-    def test_missing_input(self):
-        with self.assertRaises(StopIteration):
-            self.run_exercise(5, 1, 2, 3, 4)
+    def test_no_discount(self):
+        lines = self.run_exercise("lunes", 2)
+        self.assertEqual(lines, [])
 
+    def test_no_discount_weekday(self):
+        lines = self.run_exercise("martes", 10)
+        self.assertEqual(lines, [])
 
 
 if __name__ == '__main__':

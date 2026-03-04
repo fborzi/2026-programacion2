@@ -5,13 +5,13 @@ import sys
 import unittest
 from unittest.mock import patch
 
-from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_STRING_WITHOUT_COLON
+from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_INT_ONLY
 
 
-class TestExercise20(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio20"
+class TestExercise207(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio207"
 
-    def run_exercise(self, *inputs: str) -> list[str]:
+    def run_exercise(self, *inputs: int) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""
         with patch("builtins.input", side_effect=list(inputs)):
             with patch("sys.stdout", new = io.StringIO()) as fake_out:
@@ -26,25 +26,24 @@ class TestExercise20(unittest.TestCase):
     def validateRegex(self, line: str) -> None:
         self.assertRegex(line, REGEX_FOR_LETTERS, "The print must contain a sentence explaining the result.")
 
-    def test_cesar_two(self):
-        lines = self.run_exercise("hola", "2")
+    def test_counter(self):
+        lines = self.run_exercise(5, 1, 2, 3, 4, 5, -1)
 
-        m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
-
-        print(lines)
-        self.assertIsNotNone(m1)
-        self.assertEqual(m1[0], "jqnc")
-        self.validateRegex(lines[0])
-
-    def test_cesar_three(self):
-        lines = self.run_exercise("extra", "3")
-
-        m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
+        m1 = re.findall(REGEX_FOR_INT_ONLY, lines[0])
+        m2 = re.findall(REGEX_FOR_INT_ONLY, lines[1])
 
         print(lines)
         self.assertIsNotNone(m1)
-        self.assertEqual(m1[0], "hawud")
+        self.assertIsNotNone(m2)
+        self.assertTrue(m1.__contains__("6"))
+        self.assertTrue(m2.__contains__("9"))
         self.validateRegex(lines[0])
+        self.validateRegex(lines[1])
+
+    def test_missing_input(self):
+        with self.assertRaises(StopIteration):
+            self.run_exercise(5, 1, 2, 3, 4)
+
 
 
 if __name__ == '__main__':

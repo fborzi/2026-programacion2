@@ -8,10 +8,10 @@ from unittest.mock import patch
 from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_STRING_WITHOUT_COLON
 
 
-class TestExercise12(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio12"
+class TestExercise219(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio219"
 
-    def run_exercise(self, *inputs: int) -> list[str]:
+    def run_exercise(self, *inputs: str) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""
         with patch("builtins.input", side_effect=list(inputs)):
             with patch("sys.stdout", new = io.StringIO()) as fake_out:
@@ -26,24 +26,23 @@ class TestExercise12(unittest.TestCase):
     def validateRegex(self, line: str) -> None:
         self.assertRegex(line, REGEX_FOR_LETTERS, "The print must contain a sentence explaining the result.")
 
-    def test_prime(self):
-        lines = self.run_exercise(7)
+    def test_enter(self):
+        lines = self.run_exercise("aqui me pongo a cantar")
 
         m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
+        m2 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[1])
+        m3 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[2])
+        m4 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[3])
+        m5 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[4])
+
 
         print(lines)
         self.assertIsNotNone(m1)
-        self.assertTrue(m1[0].lower().__contains__("es primo"))
-
-    def test_not_prime(self):
-        lines = self.run_exercise(6)
-
-        m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
-
-        print(lines)
-        self.assertIsNotNone(m1)
-        self.assertTrue(m1[0].lower().__contains__("no es primo"))
-
+        self.assertEqual(m1[0], "aqui")
+        self.assertEqual(m2[0], "me")
+        self.assertEqual(m3[0], "pongo")
+        self.assertEqual(m4[0], "a")
+        self.assertEqual(m5[0], "cantar")
 
 
 if __name__ == '__main__':

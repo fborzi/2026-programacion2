@@ -1,14 +1,15 @@
 import importlib
 import io
+import re
 import sys
 import unittest
 from unittest.mock import patch
 
-from utils.constant import REGEX_FOR_LETTERS
+from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_STRING_WITHOUT_COLON
 
 
-class TestExercise8(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio8"
+class TestExercise212(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio212"
 
     def run_exercise(self, *inputs: int) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""
@@ -25,17 +26,24 @@ class TestExercise8(unittest.TestCase):
     def validateRegex(self, line: str) -> None:
         self.assertRegex(line, REGEX_FOR_LETTERS, "The print must contain a sentence explaining the result.")
 
-    def test_fibonacci(self):
-        lines = self.run_exercise()
+    def test_prime(self):
+        lines = self.run_exercise(7)
+
+        m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
+
         print(lines)
+        self.assertIsNotNone(m1)
+        self.assertTrue(m1[0].lower().__contains__("es primo"))
 
-        first_number = lines[0]
-        last_number = lines[-1]
+    def test_not_prime(self):
+        lines = self.run_exercise(6)
 
-        self.assertIsNotNone(first_number)
-        self.assertIsNotNone(last_number)
-        self.assertEqual(first_number, "0")
-        self.assertEqual(last_number,"46368")
+        m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
+
+        print(lines)
+        self.assertIsNotNone(m1)
+        self.assertTrue(m1[0].lower().__contains__("no es primo"))
+
 
 
 if __name__ == '__main__':

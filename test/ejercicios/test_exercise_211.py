@@ -9,8 +9,8 @@ from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_INT_ONLY, REGEX_FOR_STRI
     REGEX_FOR_FLOAT_INT
 
 
-class TestExercise11(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio11"
+class TestExercise211(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio211"
 
     def run_exercise(self, *inputs: int) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""

@@ -5,11 +5,11 @@ import sys
 import unittest
 from unittest.mock import patch
 
-from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_INT_WITHOUT_COLON
+from utils.constant import REGEX_FOR_LETTERS
 
 
-class TestExercise2(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio2"
+class TestExercise204(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio204"
 
     def run_exercise(self, *inputs: int) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""
@@ -26,28 +26,16 @@ class TestExercise2(unittest.TestCase):
     def validateRegex(self, line: str) -> None:
         self.assertRegex(line, REGEX_FOR_LETTERS, "The print must contain a sentence explaining the result.")
 
-    def test_greater_than_10(self):
+    def test_odd(self):
         lines = self.run_exercise(11)
-        greater = lines[0].lower().__contains__("mayor")
-        m = re.search(REGEX_FOR_INT_WITHOUT_COLON, lines[0])
-        self.assertIsNotNone(m)
-        self.assertTrue(greater)
+        odd = lines[0].__contains__("IMPAR")
+        self.assertTrue(odd, "The text does not specified if it an odd number as it is required.")
         self.validateRegex(lines[0])
 
-    def test_less_than_10(self):
-        lines = self.run_exercise(9)
-        less = lines[0].lower().__contains__("menor")
-        m = re.search(REGEX_FOR_INT_WITHOUT_COLON, lines[0])
-        self.assertIsNotNone(m)
-        self.assertTrue(less)
-        self.validateRegex(lines[0])
-
-    def test_equal_10(self):
+    def test_even(self):
         lines = self.run_exercise(10)
-        equal = lines[0].lower().__contains__("igual")
-        m = re.search(REGEX_FOR_INT_WITHOUT_COLON, lines[0])
-        self.assertIsNotNone(m)
-        self.assertTrue(equal)
+        even = lines[0].__contains__("PAR")
+        self.assertTrue(even, "The text does not specified if it an even number as it is required.")
         self.validateRegex(lines[0])
 
 

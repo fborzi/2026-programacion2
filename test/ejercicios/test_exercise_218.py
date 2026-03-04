@@ -5,13 +5,13 @@ import sys
 import unittest
 from unittest.mock import patch
 
-from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_INT_ONLY, REGEX_FOR_STRING_WITHOUT_COLON
+from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_STRING_WITHOUT_COLON
 
 
-class TestExercise10(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio10"
+class TestExercise218(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio218"
 
-    def run_exercise(self, *inputs: float) -> list[str]:
+    def run_exercise(self, *inputs: str) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""
         with patch("builtins.input", side_effect=list(inputs)):
             with patch("sys.stdout", new = io.StringIO()) as fake_out:
@@ -26,22 +26,23 @@ class TestExercise10(unittest.TestCase):
     def validateRegex(self, line: str) -> None:
         self.assertRegex(line, REGEX_FOR_LETTERS, "The print must contain a sentence explaining the result.")
 
-    def test_revenues(self):
-        lines = self.run_exercise(100, -20, 250, 3, 0)
+    def test_capitalize(self):
+        lines = self.run_exercise("harry POTTER")
 
         m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
-        m2 = re.findall(REGEX_FOR_INT_ONLY, lines[1])
 
         print(lines)
         self.assertIsNotNone(m1)
-        self.assertIsNotNone(m2)
-        self.assertTrue(m1[0].lower().__contains__("negativo"))
-        self.assertTrue(m2[0].__contains__("353"))
-        self.validateRegex(lines[1])
+        self.assertEqual(m1[0], "Harry potter")
 
-    def test_missing_input(self):
-        with self.assertRaises(StopIteration):
-            self.run_exercise(5, 1, 2, 3, 4)
+    def test_capitalize_space(self):
+        lines = self.run_exercise(" harry POTTER ")
+
+        m1 = re.findall(REGEX_FOR_STRING_WITHOUT_COLON, lines[0])
+
+        print(lines)
+        self.assertIsNotNone(m1)
+        self.assertEqual(m1[0], "Harry potter")
 
 
 if __name__ == '__main__':

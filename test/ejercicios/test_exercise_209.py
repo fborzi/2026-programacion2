@@ -8,8 +8,8 @@ from unittest.mock import patch
 from utils.constant import REGEX_FOR_LETTERS, REGEX_FOR_INT_ONLY
 
 
-class TestExercise13(unittest.TestCase):
-    MODULE_NAME = "src.ejercicios.ejercicio13"
+class TestExercise209(unittest.TestCase):
+    MODULE_NAME = "src.ejercicios.ejercicio209"
 
     def run_exercise(self, *inputs: int) -> list[str]:
         """Runs the exercise with the given inputs and captures the output."""
@@ -26,17 +26,19 @@ class TestExercise13(unittest.TestCase):
     def validateRegex(self, line: str) -> None:
         self.assertRegex(line, REGEX_FOR_LETTERS, "The print must contain a sentence explaining the result.")
 
-    def test_prime_numbers(self):
-        lines = self.run_exercise(2, 3, 5, 7, 9, 6, 8, 4, 0)
+    def test_finals(self):
+        lines = self.run_exercise(47122, 5, 47123, 3, 47124, 10, 0)
 
         m1 = re.findall(REGEX_FOR_INT_ONLY, lines[0])
+        m2 = re.findall(REGEX_FOR_INT_ONLY, lines[1])
 
         print(lines)
         self.assertIsNotNone(m1)
-        self.assertTrue(m1[0].__contains__("4"))
-
+        self.assertIsNotNone(m2)
+        self.assertTrue(m1.__contains__("2"))
+        self.assertTrue(m2.__contains__("1"))
         self.validateRegex(lines[0])
-
+        self.validateRegex(lines[1])
 
     def test_missing_input(self):
         with self.assertRaises(StopIteration):
