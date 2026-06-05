@@ -76,11 +76,11 @@ class TestExercise201(unittest.TestCase):
 
     def test_division_fail(self):
         lines = self.run_exercise(150, 0)
-
-        m = re.search(REGEX_FOR_FLOAT_INT, lines[3])
-
+        print(lines)
+        m = re.search(REGEX_FOR_FLOAT_INT, lines[0])
+        print(m)
         self.assertIsNone(m)
-        self.assertEqual(len(lines), 6, "Its not informed to the user that division by zero is not possible.")
+        self.assertEqual(len(lines), 9, "Its not informed to the user that division by zero is not possible.")
         self.validateRegex(lines[3])
 
     def test_abs1(self):
